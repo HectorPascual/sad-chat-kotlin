@@ -14,6 +14,7 @@ import com.googlecode.lanterna.terminal.Terminal
 import com.googlecode.lanterna.terminal.TerminalResizeListener
 import com.googlecode.lanterna.terminal.ansi.UnixTerminal
 
+
 import java.io.IOException
 import java.util.ArrayList
 import java.util.Arrays
@@ -38,7 +39,9 @@ class FirstGUI(private val socket: MySocket) {
     private var exit: Button? = null
 
     fun run() {
+
         try {
+
             term = UnixTerminal()
             termColumns = term!!.getTerminalSize().getColumns()
             termRows = term!!.getTerminalSize().getRows()
@@ -53,6 +56,7 @@ class FirstGUI(private val socket: MySocket) {
             initComponents()
             sizeComponents()
             initPanel()
+
 
             val resizeListener = (object: TerminalResizeListener {
                 override fun onResized(terminal: Terminal, terminalSize: TerminalSize) {
