@@ -1,40 +1,20 @@
 import java.net.*
 import java.io.*
 
-class MyServerSocket @Throws(IOException::class)
-constructor(port: Int) : ServerSocket(port) {
-
+class MyServerSocket(port: Int){
     private val printout: PrintWriter? = null
     private val `in`: BufferedReader? = null
+    private var socket: Socket? = null
 
-    @Override
+    init {
+        socket = Socket(port)
+    }
+
     fun accept(): Socket? {
-        try {
-            return super.accept()
-        } catch (ex: IOException) {
-        }
-
-        return null
+        return socket!!.accept()
     }
 
-    @Override
     fun close() {
-        try {
-            super.close()
-        } catch (ex: IOException) {
-        }
-
-    }
-
-    companion object {
-
-        fun init(port: Int): MyServerSocket? {
-            try {
-                return MyServerSocket(port)
-            } catch (ex: IOException) {
-                return null
-            }
-
-        }
+        socket!!.close()
     }
 }

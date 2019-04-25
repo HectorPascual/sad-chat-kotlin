@@ -6,7 +6,6 @@ import java.util.Arrays
 class Client {
 
     fun main(args: Array<String>) {
-        val `in` = BufferedReader(InputStreamReader(System.`in`))
         val client = MySocket("127.0.0.1", 1414)
 
         val gui = FirstGUI(client)
@@ -16,11 +15,11 @@ class Client {
         }.start()
 
         Thread {
-            var line: String? = null
+            var line: String?
             while (client.read().let { line = it; line!=null }) {
                 if (line!!.contains("\$userlist")) { // kind of commands to interact with the server
-                    val users = ArrayList<String>(Arrays.asList(line!!.split(",")))
-                    users.remove(0)
+                    val users = ArrayList<String>(line!!.split(",").toTypedArray() as List<String>)
+                    users.removeAt(0)
                     gui.updateUserList(users)
                 } else {
                     gui.write(line!!)

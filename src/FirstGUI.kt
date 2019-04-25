@@ -53,15 +53,14 @@ class FirstGUI(private val socket: MySocket) {
             initComponents()
             sizeComponents()
             initPanel()
-            
-            val resizeListener = TerminalResizeListener() {
-                fun onResized(terminal: Terminal, terminalSize: TerminalSize) {
+
+            val resizeListener = (object: TerminalResizeListener {
+                override fun onResized(terminal: Terminal, terminalSize: TerminalSize) {
                     termColumns = terminalSize.getColumns()
                     termRows = terminalSize.getRows()
                     sizeComponents()
                 }
-
-            }
+            })
 
             term!!.addResizeListener(resizeListener)
 
