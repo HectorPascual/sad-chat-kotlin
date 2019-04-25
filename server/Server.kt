@@ -1,7 +1,7 @@
 import java.io.*
 import java.util.concurrent.ConcurrentHashMap
 
-class Server {
+//class Server {
 
     fun main(args: Array<String>) {
         val server = MyServerSocket(1414)
@@ -9,7 +9,7 @@ class Server {
 
         while (true) {
           //val socket
-          val client = MySocket(server.accept()!!)
+          val client = MySocket(server!!.accept())
 
           //final String username;
             if (client != null) {
@@ -22,8 +22,8 @@ class Server {
                           users.put(username!!, client)
 
                           //Update userlist each time a user joins succesfully
-                          var userlist = "$userlist,"
-                          for (s in users.keySet) {
+                          var userlist = "\$userlist,"
+                          for (s in users.keys) {
                               userlist = userlist + s + ","
                           }
                           for (s in users.values) {
@@ -42,12 +42,12 @@ class Server {
                   var line: String?
                   while (true) {
                       if (users.get(username)!!.read().let { line = it; line!=null }) {
-                          for (s in users.keySet) {
+                          for (s in users.keys) {
                               if (s !== username) users.get(s)!!.write("$username: $line")
                           }
                       } else {
-                          var modifyUsers = "$userlist,"
-                          for (s in users.keySet) {
+                          var modifyUsers = "\$userlist,"
+                          for (s in users.keys) {
                               if (s !== username) {
                                   modifyUsers = modifyUsers + s + ","
                                   users.get(s)!!.write("$username has left the chat")
@@ -65,4 +65,4 @@ class Server {
             }
         }
     }
-}
+//}

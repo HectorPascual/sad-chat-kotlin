@@ -3,7 +3,7 @@ import java.net.*
 import java.util.ArrayList
 import java.util.Arrays
 
-class Client {
+//class Client {
 
     fun main(args: Array<String>) {
         val client = MySocket("127.0.0.1", 1414)
@@ -28,4 +28,4 @@ class Client {
             client.close()
         }.start()
     }
-}
+//}

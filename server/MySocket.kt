@@ -1,13 +1,13 @@
 import java.io.*
 import java.net.*
 
-class MySocket(client: Socket) {
+class MySocket(client: Socket?) {
     private var out: PrintWriter? = null
     private var input: BufferedReader? = null
     private var socket: Socket? = null
 
     init {
-        socket = Socket(client)
+        socket = client
     }
 
     fun close() {
