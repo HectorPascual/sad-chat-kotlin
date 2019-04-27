@@ -14,15 +14,15 @@ class KeyStrokeListener(private val gui: FirstGUI) : WindowListener {
         }
     }
 
-    override fun onUnhandledInput(basePane: Window, keyStroke: KeyStroke, hasBeenHandled: AtomicBoolean) {
+    override fun onUnhandledInput(basePane: Window?, keyStroke: KeyStroke?, hasBeenHandled: AtomicBoolean?) {
         // TODO Auto-generated method stub
     }
 
-    override fun onResized(window: Window, oldSize: TerminalSize, newSize: TerminalSize) {
+    override fun onResized(window: Window?, oldSize: TerminalSize?, newSize: TerminalSize?) {
         // TODO Auto-generated method stub
     }
 
-    override fun onMoved(window: Window, oldPosition: TerminalPosition, newPosition: TerminalPosition) {
+    override fun onMoved(window: Window?, oldPosition: TerminalPosition?, newPosition: TerminalPosition?) {
         // TODO Auto-generated method stub
     }
 }
