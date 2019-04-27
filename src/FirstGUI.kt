@@ -75,7 +75,7 @@ class FirstGUI(private val socket: MySocket) {
             window!!.setComponent(absolutPanel)
             textGUI!!.addWindowAndWait(window)
 
-            
+
         } catch (e: IOException) {
 
         } finally {
@@ -204,7 +204,7 @@ class FirstGUI(private val socket: MySocket) {
         if (!input.equals("")) {
             socket.write(input)
             textBox!!.setText("")
-            write(input)
+            write("me: " + input)
         }
     }
 }
