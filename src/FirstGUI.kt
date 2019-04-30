@@ -39,7 +39,6 @@ class FirstGUI(private val socket: MySocket) {
     private var exit: Button? = null
 
     fun run() {
-
         try {
 
             term = UnixTerminal()
@@ -90,17 +89,17 @@ class FirstGUI(private val socket: MySocket) {
 
     fun checkKeys() {
         Thread{
-                try {
-                    while (true) {
-                        keyStroke = screen?.pollInput()
-                        if (keyStroke != null && keyStroke?.getKeyType() === KeyType.Escape) {
-                            window?.close()
-                            System.exit(0) //exits the process
-                        }
+            try {
+                while (true) {
+                    keyStroke = screen?.pollInput()
+                    if (keyStroke != null && keyStroke?.getKeyType() === KeyType.Escape) {
+                        window?.close()
+                        System.exit(0) //exits the process
                     }
-                } catch (e: IOException) {
                 }
-            }.start()
+            } catch (e: IOException) {
+            }
+        }.start()
     }
 
     fun write(txt: String?) {
@@ -148,18 +147,14 @@ class FirstGUI(private val socket: MySocket) {
 
         exit?.setPosition(TerminalPosition(termColumns * 85 / 100, termRows * 85 / 100))
         exit?.setSize(TerminalSize(8, 1))
-
     }
 
     private fun initComponents() {
         users = Label("")
-
         chatContent = Label("")
 
         separatorHor = Separator(Direction.HORIZONTAL)
-
         separatorVert = Separator(Direction.VERTICAL)
-
         textBox = TextBox("", TextBox.Style.MULTI_LINE)
 
         send = Button("Send", object : Runnable {
@@ -189,7 +184,6 @@ class FirstGUI(private val socket: MySocket) {
             absolutPanel?.addComponent(exit)
         } catch (e: IOException) {
         }
-
     }
 
     //Utility to clear screen
