@@ -11,10 +11,10 @@ class MyServerSocket(port: Int){
     }
 
     fun accept(): Socket? {
-        return socket!!.accept()
+        return socket?.accept()
     }
 
     fun close() {
-        socket!!.close()
+        socket?.close()
     }
 }

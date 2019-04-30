@@ -18,11 +18,11 @@ import java.util.*
             var line: String?
             while (client.read().let { line = it; line!=null }) {
                 if (line!!.contains("\$userlist")) { // kind of commands to interact with the server
-                    val users = line!!.split(",") as ArrayList<String>
+                    val users = line?.split(",") as ArrayList<String>
                     users.removeAt(0)
                     gui.updateUserList(users)
                 } else {
-                    gui.write(line!!)
+                    gui.write(line)
                 }
             }
             client.close()

@@ -9,10 +9,9 @@ import java.util.concurrent.ConcurrentHashMap
 
         while (true) {
           //val socket
-          val client = MySocket(server!!.accept())
+          val client = MySocket(server.accept())
 
           //final String username;
-            if (client != null) {
               Thread{
                   // Name request pa
                   var username: String?
@@ -41,16 +40,16 @@ import java.util.concurrent.ConcurrentHashMap
                   // Continuous reading
                   var line: String?
                   while (true) {
-                      if (users.get(username)!!.read().let { line = it; line!=null }) {
+                      if (users.get(username)?.read().let { line = it; line!=null }) {
                           for (s in users.keys) {
-                              if (s !== username) users.get(s)!!.write("$username: $line")
+                              if (s !== username) users.get(s)?.write("$username: $line")
                           }
                       } else {
                           var modifyUsers = "\$userlist,"
                           for (s in users.keys) {
                               if (s !== username) {
                                   modifyUsers = modifyUsers + s + ","
-                                  users.get(s)!!.write("$username has left the chat")
+                                  users.get(s)?.write("$username has left the chat")
                               }
                           }
                           users.remove(username)
@@ -62,7 +61,6 @@ import java.util.concurrent.ConcurrentHashMap
                       }
                   }
                 }.start()
-            }
         }
     }
 //}

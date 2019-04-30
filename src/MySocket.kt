@@ -11,21 +11,21 @@ class MySocket(ip: String, port: Int) {
     }
 
     fun close() {
-        socket!!.close()
+        socket?.close()
     }
 
     fun shutdownInput() {
-        socket!!.shutdownInput()
+        socket?.shutdownInput()
     }
 
-    fun write(line: String) {
-        out = PrintWriter(socket!!.getOutputStream(), true)
-        out!!.println(line)
+    fun write(line: String?) {
+        out = PrintWriter(socket?.getOutputStream(), true)
+        out?.println(line)
     }
 
     fun read(): String? {
-        input = BufferedReader(InputStreamReader(socket!!.getInputStream()))
-        return input!!.readLine()
+        input = BufferedReader(InputStreamReader(socket?.getInputStream()))
+        return input?.readLine()
     }
 
 }
