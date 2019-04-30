@@ -1,8 +1,8 @@
 import java.io.*
 import java.util.concurrent.ConcurrentHashMap
 
-/* The Server main creates a server and proceeds to accept as many clients as
-possible. When a client enters the chat, a thread is started and the client is
+/* The Server creates a socket connection and proceeds to accept as many clients
+as possible. When a client enters the chat, a thread is started and the client is
 able to register his name (if is not taken) and after that is able to talk with
 the other participants.
 The Server also informs when a client enters or lefts the chat */
@@ -29,7 +29,7 @@ fun main(args: Array<String>) {
                   }
                   for (s in users.values) {
                       s.write(userlist)
-                      if (s !== users.get(username)) {
+                      if (s != users.get(username)) {
                           System.out.println("Sending " + username + "has join the chat to" + s.toString())
                           s.write("$username has join the chat")
                       }
@@ -42,14 +42,14 @@ fun main(args: Array<String>) {
           // Continuous reading
           var line: String?
           while (true) {
-              if (users.get(username)?.read().let { line = it; line!=null }) {
+              if (users.get(username)?.read().let { line = it; line != null }) {
                   for (s in users.keys) {
-                      if (s !== username) users.get(s)?.write("$username: $line")
+                      if (s != username) users.get(s)?.write("$username: $line")
                   }
               } else {
                   var modifyUsers = "\$userlist,"
                   for (s in users.keys) {
-                      if (s !== username) {
+                      if (s != username) {
                           modifyUsers = modifyUsers + s + ","
                           users.get(s)?.write("$username has left the chat")
                       }
