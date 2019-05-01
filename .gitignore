@@ -2,6 +2,6 @@ src/*.class
 src/*.jar
 lib/
 .idea/
-
-
+server/*.jar
+server/*.class
 *.class
