@@ -1,4 +1,12 @@
-# How to
+# Lanterna chat in kotlin
+
+## Request name screen
+
+![Request name](screenshots/sc1.png)
+
+## Chat screen
+
+![Request name](screenshots/sc2.png)
 
 ## Compiling server and client :
 
@@ -27,3 +35,4 @@ java -jar server.jar
 ~~~
 java -cp client.jar:../libs/lanterna-3.0.1.jar ClientKt
 ~~~
+
