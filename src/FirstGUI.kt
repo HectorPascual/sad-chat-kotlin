@@ -88,7 +88,7 @@ class FirstGUI(private val socket: MySocket) {
     }
 
     /**
-     * Closes the screen
+     * Closes the screen and the socket
      */
     fun close() {
         window?.close()
@@ -112,6 +112,7 @@ class FirstGUI(private val socket: MySocket) {
      */
     private fun requestName() {
         name = TextInputDialog.showDialog(textGUI, "", "Type your name (max 8 letters)", "")
+        if(name==null) close()
         socket.write(name)
     }
 
@@ -160,8 +161,7 @@ class FirstGUI(private val socket: MySocket) {
 
         exit = Button("Exit", object : Runnable {
             override fun run() {
-                window?.close()
-                System.exit(0)
+                close()
             }
         })
     }

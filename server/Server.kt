@@ -19,8 +19,8 @@ fun main(args: Array<String>) {
           var username: String?
           while (true) {
               username = client.read()
-              if (!users.containsKey(username)) {
-                  users.put(username!!, client)
+              if (username!=null && !users.containsKey(username)) {
+                  users.put(username, client)
 
                   //Update userlist each time a user joins succesfully
                   var userlist = "\$userlist,"
