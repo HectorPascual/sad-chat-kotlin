@@ -18,11 +18,19 @@ class MySocket(ip: String, port: Int) {
         socket?.shutdownInput()
     }
 
+    /**
+     * Writes a string to the socket
+     * @param line string that will be written
+     */
     fun write(line: String?) {
         out = PrintWriter(socket?.getOutputStream(), true)
         out?.println(line)
     }
 
+    /**
+     * Reads from the socket
+     * @return the line read
+     */
     fun read(): String? {
         input = BufferedReader(InputStreamReader(socket?.getInputStream()))
         return input?.readLine()

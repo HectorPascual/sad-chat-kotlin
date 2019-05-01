@@ -4,9 +4,11 @@ import java.util.ArrayList
 import java.util.Arrays
 import java.util.*
 
-/* The Client is the one who starts the GUI. Afer that, proceeds to read from
-the Server (other clients) and prints the messages in his GUI. When he leaves,
-he closes the connection */
+/**
+ *  The Client is the one who starts the GUI. Afer that, proceeds to read from
+ *  the Server (other clients) and prints the messages in his GUI. When he leaves,
+ *  he closes the connection
+*/
 
 fun main(args: Array<String>) {
     val client = MySocket("127.0.0.1", 1414)

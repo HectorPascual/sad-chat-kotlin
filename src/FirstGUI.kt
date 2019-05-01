@@ -38,7 +38,11 @@ class FirstGUI(private val socket: MySocket) {
     private var keyStroke: KeyStroke? = null
     private var exit: Button? = null
 
+    /**
+     * Run method with creates and initializes the window
+     */
     fun run() {
+
         term = UnixTerminal()
         termColumns = term!!.getTerminalSize().getColumns()
         termRows = term!!.getTerminalSize().getRows()
@@ -73,17 +77,28 @@ class FirstGUI(private val socket: MySocket) {
         screen?.stopScreen()
     }
 
+    /**
+     * Method that writes to the chat screen
+     * @param txt text that will be written
+     */
     fun write(txt: String?) {
         if (countLines() >= termRows * 76 / 100) chatContent?.setText("")
         val tmp = chatContent?.getText() + '\n' + txt
         chatContent?.setText(tmp)
     }
 
+    /**
+     * Closes the screen
+     */
     fun close() {
         window?.close()
         System.exit(0) //exits the process
     }
 
+    /**
+     * Updates the user list in the screen
+     * @param usersList current user list
+     */
     fun updateUserList(usersList: List<String>) {
         var tmp = ""
         for (s in usersList) {
@@ -92,11 +107,17 @@ class FirstGUI(private val socket: MySocket) {
         users?.setText(tmp)
     }
 
+    /**
+     * Requests the name in screen with an input dialog
+     */
     private fun requestName() {
         name = TextInputDialog.showDialog(textGUI, "", "Type your name (max 8 letters)", "")
         socket.write(name)
     }
 
+    /**
+     * Sizes all the components
+     */
     private fun sizeComponents() {
         users?.setPosition(TerminalPosition(termColumns * 82 / 100, 0))
         users?.setSize(TerminalSize(8, termRows))
@@ -120,6 +141,9 @@ class FirstGUI(private val socket: MySocket) {
         exit?.setSize(TerminalSize(8, 1))
     }
 
+    /**
+     * Initializes all the widgets and the listeners of send and exit button
+     */
     private fun initComponents() {
         users = Label("")
         chatContent = Label("")
@@ -142,6 +166,9 @@ class FirstGUI(private val socket: MySocket) {
         })
     }
 
+    /**
+     * Adds the widgets to the main panel
+     */
     private fun initPanel() {
         absolutPanel = Panel(AbsoluteLayout())
         absolutPanel?.setPreferredSize(TerminalSize(term!!.getTerminalSize().getColumns(), term!!.getTerminalSize().getRows()))
@@ -154,13 +181,18 @@ class FirstGUI(private val socket: MySocket) {
         absolutPanel?.addComponent(exit)
     }
 
-    //Utility to clear screen
-    private fun countLines(): Int {
+    /**
+     * Count the lines in chat screen
+     * @return the number of lines
+     */    private fun countLines(): Int {
         val txt = chatContent!!.getText()
         val array = txt.split("\n")
         return array.size + 1
     }
 
+    /**
+     * Writes the input text to the chat screen and to the socket
+     */
     private fun sendAction() {
         val input = textBox?.getText()
         if (!input.equals("")) {

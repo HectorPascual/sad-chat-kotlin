@@ -10,10 +10,17 @@ class MyServerSocket(port: Int){
         socket = ServerSocket(port)
     }
 
+    /**
+     * Accepts a new connection
+     * @return the socket connected
+     */
     fun accept(): Socket? {
         return socket?.accept()
     }
 
+    /**
+     * Closes the socket
+     */
     fun close() {
         socket?.close()
     }
