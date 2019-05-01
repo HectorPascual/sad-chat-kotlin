@@ -150,7 +150,7 @@ class FirstGUI(private val socket: MySocket) {
 
         separatorHor = Separator(Direction.HORIZONTAL)
         separatorVert = Separator(Direction.VERTICAL)
-        textBox = TextBox("", TextBox.Style.MULTI_LINE)
+        textBox = TextBox("")
 
         send = Button("Send", object : Runnable {
             override fun run() {
