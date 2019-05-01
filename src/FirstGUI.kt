@@ -39,67 +39,38 @@ class FirstGUI(private val socket: MySocket) {
     private var exit: Button? = null
 
     fun run() {
-        try {
+        term = UnixTerminal()
+        termColumns = term!!.getTerminalSize().getColumns()
+        termRows = term!!.getTerminalSize().getRows()
 
-            term = UnixTerminal()
-            termColumns = term!!.getTerminalSize().getColumns()
-            termRows = term!!.getTerminalSize().getRows()
+        screen = TerminalScreen(term)
+        screen?.startScreen()
 
-            screen = TerminalScreen(term)
-            screen?.startScreen()
+        textGUI = MultiWindowTextGUI(screen)
+        window = BasicWindow("SAD 2019  -   CLIENT CHAT")
+        window?.setHints(Arrays.asList(Window.Hint.FULL_SCREEN))
 
-            textGUI = MultiWindowTextGUI(screen)
-            window = BasicWindow("SAD 2019  -   CLIENT CHAT")
-            window?.setHints(Arrays.asList(Window.Hint.FULL_SCREEN))
+        initComponents()
+        sizeComponents()
+        initPanel()
 
-            initComponents()
-            sizeComponents()
-            initPanel()
-
-
-            val resizeListener = (object: TerminalResizeListener {
-                override fun onResized(terminal: Terminal, terminalSize: TerminalSize) {
-                    termColumns = terminalSize.getColumns()
-                    termRows = terminalSize.getRows()
-                    sizeComponents()
-                }
-            })
-
-            term?.addResizeListener(resizeListener)
-
-            requestName()
-
-            val listener = KeyStrokeListener(this)
-            window?.addWindowListener(listener)
-            window?.setComponent(absolutPanel)
-            textGUI?.addWindowAndWait(window)
-
-
-        } catch (e: IOException) {
-
-        } finally {
-            try {
-                screen?.stopScreen()
-            } catch (e: IOException) {
-                e.printStackTrace()
+        val resizeListener = (object: TerminalResizeListener {
+            override fun onResized(terminal: Terminal, terminalSize: TerminalSize) {
+                termColumns = terminalSize.getColumns()
+                termRows = terminalSize.getRows()
+                sizeComponents()
             }
+        })
 
-        }
-    }
+        term?.addResizeListener(resizeListener)
+        requestName()
 
-    fun checkKeys() {
-        Thread{
-            try {
-                while (true) {
-                    keyStroke = screen?.pollInput()
-                    if (keyStroke != null && keyStroke?.getKeyType() === KeyType.Escape) {
-                        window?.close()
-                        System.exit(0) //exits the process
-                    }
-                }
-            } catch (e: IOException) {
-            }
-        }.start()
+        val listener = KeyStrokeListener(this)
+        window?.addWindowListener(listener)
+        window?.setComponent(absolutPanel)
+        textGUI?.addWindowAndWait(window)
+
+        screen?.stopScreen()
     }
 
     fun write(txt: String?) {
@@ -172,18 +143,15 @@ class FirstGUI(private val socket: MySocket) {
     }
 
     private fun initPanel() {
-        try {
-            absolutPanel = Panel(AbsoluteLayout())
-            absolutPanel?.setPreferredSize(TerminalSize(term!!.getTerminalSize().getColumns(), term!!.getTerminalSize().getRows()))
-            absolutPanel?.addComponent(users)
-            absolutPanel?.addComponent(chatContent)
-            absolutPanel?.addComponent(separatorHor)
-            absolutPanel?.addComponent(separatorVert)
-            absolutPanel?.addComponent(textBox)
-            absolutPanel?.addComponent(send)
-            absolutPanel?.addComponent(exit)
-        } catch (e: IOException) {
-        }
+        absolutPanel = Panel(AbsoluteLayout())
+        absolutPanel?.setPreferredSize(TerminalSize(term!!.getTerminalSize().getColumns(), term!!.getTerminalSize().getRows()))
+        absolutPanel?.addComponent(users)
+        absolutPanel?.addComponent(chatContent)
+        absolutPanel?.addComponent(separatorHor)
+        absolutPanel?.addComponent(separatorVert)
+        absolutPanel?.addComponent(textBox)
+        absolutPanel?.addComponent(send)
+        absolutPanel?.addComponent(exit)
     }
 
     //Utility to clear screen

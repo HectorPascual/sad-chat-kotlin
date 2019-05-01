@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 class KeyStrokeListener(private val gui: FirstGUI) : WindowListener {
     override fun onInput(basePane: Window, keyStroke: KeyStroke, deliverEvent: AtomicBoolean) {
-        if (keyStroke.getKeyType() === KeyType.Escape) {
+        if (keyStroke.getKeyType() == KeyType.Escape) {
             gui.close()
         }
     }
