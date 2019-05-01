@@ -30,8 +30,8 @@ fun main(args: Array<String>) {
                   for (s in users.values) {
                       s.write(userlist)
                       if (s != users.get(username)) {
-                          System.out.println("Sending " + username + "has join the chat to" + s.toString())
-                          s.write("$username has join the chat")
+                          System.out.println("Sending " + username + "has joined the chat to" + s.toString())
+                          s.write("$username has joined the chat")
                       }
                   }
                   break
